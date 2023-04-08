@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@mantine/core";
 import { Center } from "@mantine/core";
 import { Text } from "@mantine/core";
@@ -19,6 +19,7 @@ export default function TitleWithButtons(props: Props) {
     onClickButton1,
     onClickButton2,
   } = props;
+  const [button1Disabled, setButton1Disabled] = useState(false);
 
   return (
     <Center style={{ height: "100vh" }}>
@@ -27,7 +28,28 @@ export default function TitleWithButtons(props: Props) {
           {title}
         </Text>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "60px" }}>
-          <Button color="red" onClick={onClickButton1}>
+          <Button color="red" onClick={() => {
+            if (!button1Disabled) {
+              onClickButton1();
+            }
+          }}
+            style={{
+              transition: "transform 0.3s ease",
+              transform: "translateX(0)",
+            }}
+            onMouseEnter={() => {
+              const button1 = document.getElementById("button-1");
+              if (button1) {
+                button1.style.transform = "translateX(-100px)";
+              }
+            }}
+            onMouseLeave={() => {
+              const button1 = document.getElementById("button-1");
+              if (button1) {
+                button1.style.transform = "translateX(0)";
+              }
+            }}
+            id="button-1">
             {button1Label}
           </Button>
           <Button color="blue" onClick={onClickButton2}>
