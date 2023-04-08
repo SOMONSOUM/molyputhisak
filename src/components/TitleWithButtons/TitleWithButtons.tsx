@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@mantine/core";
-import { Center } from "@mantine/core";
-import { Text } from "@mantine/core";
+import { Button, Center, Text, Modal } from "@mantine/core";
 
 interface Props {
   title: string;
@@ -20,6 +18,7 @@ export default function TitleWithButtons(props: Props) {
     onClickButton2,
   } = props;
   const [button1Disabled, setButton1Disabled] = useState(false);
+  const [showCongratsModal, setShowCongratsModal] = useState(false);
 
   return (
     <Center style={{ height: "100vh" }}>
@@ -65,11 +64,19 @@ export default function TitleWithButtons(props: Props) {
           >
             {button1Label}
           </Button>
-          <Button color="blue" onClick={onClickButton2}>
+          <Button color="blue" onClick={() => setShowCongratsModal(true)}>
             {button2Label}
           </Button>
         </div>
       </div>
+      <Modal
+        opened={showCongratsModal}
+        onClose={() => setShowCongratsModal(false)}
+        title="Congratulations! 🎉"
+        size="sm"
+      >
+        <span>You're my girlfriend from now on!</span>
+      </Modal>
     </Center>
   );
 }
