@@ -75,7 +75,7 @@ export default function TitleWithButtons(props: Props) {
         title="Congratulations! 🎉"
         size="sm"
       >
-        <span>You're my girlfriend from now on!</span>
+        <span>You are my girlfriend from now on!</span>
       </Modal>
     </Center>
   );
