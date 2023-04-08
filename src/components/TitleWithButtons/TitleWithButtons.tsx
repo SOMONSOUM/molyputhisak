@@ -28,28 +28,41 @@ export default function TitleWithButtons(props: Props) {
           {title}
         </Text>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "60px" }}>
-          <Button color="red" onClick={() => {
-            if (!button1Disabled) {
-              onClickButton1();
-            }
-          }}
+          <Button
+            color="red"
+            onClick={() => {
+              if (!button1Disabled) {
+                onClickButton1();
+                const button1 = document.getElementById("button-1");
+                if (button1) {
+                  button1.style.transform = "translateX(-100px)";
+                  setTimeout(() => {
+                    button1.style.transform = "translateX(0)";
+                  }, 500);
+                }
+              }
+            }}
             style={{
-              transition: "transform 0.3s ease",
+              transition: "transform 0.1s ease",
               transform: "translateX(0)",
+              pointerEvents: button1Disabled ? "none" : "auto",
             }}
             onMouseEnter={() => {
+              setButton1Disabled(true);
               const button1 = document.getElementById("button-1");
               if (button1) {
                 button1.style.transform = "translateX(-100px)";
               }
             }}
             onMouseLeave={() => {
+              setButton1Disabled(false);
               const button1 = document.getElementById("button-1");
               if (button1) {
                 button1.style.transform = "translateX(0)";
               }
             }}
-            id="button-1">
+            id="button-1"
+          >
             {button1Label}
           </Button>
           <Button color="blue" onClick={onClickButton2}>
